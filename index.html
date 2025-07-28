@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>TikTok Shop</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <!-- 引入主样式文件：按钮/布局/响应式等 -->
+    <link rel="stylesheet" href="skin/css/style.css">
+    <!-- 页面专用样式文件：标题/内容区/特性等 -->
+    <link rel="stylesheet" href="skin/css/index.css">
+    <style>
+    /* 覆盖和补充部分样式（主要是背景和响应式） */
+    html, body {
+        height: 100%;
+    }
+    body {
+        min-height: 100vh; /* 保证页面最小高度为视口高度 */
+        position: relative;
+        background: #fff;  /* 白色底色 */
+        font-family: "Helvetica Neue", Arial, sans-serif;
+    }
+    /* 背景视频容器，PC端显示 */
+    .bg-video {
+        position: fixed;
+        width: 100vw;
+        height: 100vh;
+        top: 0;
+        left: 0;
+        z-index: -2;       /* 保证在最底层 */
+        overflow: hidden;
+    }
+    .bg-video video {
+        width: 100vw;
+        height: 100vh;
+        object-fit: cover; /* 视频填充整个容器 */
+        opacity: 0.75;      /* 视频半透明 */
+        transition: opacity 0.4s;
+    }
+    /* 视频上方的黑色透明遮罩 */
+    .bg-video .overlay {
+        position: absolute;
+        top: 0; left: 0;
+        width: 100vw; height: 100vh;
+        background: rgba(0,0,0,0.18);
+        z-index: -1;
+        pointer-events: none;
+    }
+    /* 移动端背景图片容器，PC端隐藏 */
+    #gif_bg {
+        display: none;
+        width: 100vw;
+        height: 100vh;
+        position: absolute;
+        top: 0; left: 0;
+        z-index: -2;
+    }
+    #gif_bg img {
+        width: 100vw;
+        height: 100vh;
+        object-fit: cover; /* 图片填充整个容器 */
+    }
+    /* 主内容外层蒙版，居中并留有上下边距 */
+    .mask {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-top: 15vh;
+        padding-bottom: 15vh;
+        box-sizing: border-box;
+    }
+    /* 内容容器，限制最大宽度并居中 */
+    .container {
+        width: 100%;
+        max-width: 760px;
+        margin: 0 auto;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background: transparent;
+        padding: 0 12px;
+    }
+    /* LOGO区，居中显示 */
+    .logo {
+        margin-bottom: 42px;
+        margin-top: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .logo img {
+        max-width: 170px;
+        height: auto;
+        display: block;
+        margin: 0 auto;
+        filter: drop-shadow(0 2px 8px rgba(0,0,0,0.08)); /* LOGO阴影 */
+    }
+    /* 主标题样式和多色字 */
+    .title {
+        margin-bottom: 14px;
+        font-size: 2.4rem;
+        font-weight: 700;
+        color: #000;
+        line-height: 1.18;
+        text-align: center;
+        letter-spacing: 1px;
+    }
+    .title .c_red {color: #FF0050;}  
+    .title .c_blue {color: #00F5FF;}  
+    .title .c_green {color: #38a169;}  
+    .title .c_orange {color: #df800a;}
+    /* 子标题样式 */
+    .child-title {
+        margin-bottom: 18px;
+        font-size: 1.12rem;
+        font-weight: 400;
+        opacity: 0.8;
+        color: #555;
+        text-align: center;
+        letter-spacing: 0.2em;
+    }
+    /* 描述文案样式 */
+    .desc {
+        margin-bottom: 26px;
+        font-size: 1.08rem;
+        opacity: 0.83;
+        color: #444;
+        text-align: center;
+        font-weight: 400;
+        letter-spacing: 0.08em;
+    }
+    /* 按钮区，PC端4列网格布局 */
+    .download_content {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 18px;
+        justify-items: center;
+        width: 100%;
+        max-width: 650px;
+        margin: 40px auto 0 auto;
+    }
+    /* 按钮外层区，适配底部间距 */
+    .enter {
+        margin: 0 0 20px 0;
+        width: 100%;
+        margin-top: auto;
+    }
+    /* 固定底部页脚 */
+    .footer-fixed {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100vw;
+        background: rgba(255,255,255,0.85);
+        text-align: center;
+        color: #bbb;
+        font-size: 1rem;
+        letter-spacing: 0.05em;
+        padding: 12px 0 10px 0;
+        z-index: 10;
+        box-shadow: 0 -1px 16px rgba(0,0,0,0.06);
+        user-select: none;
+    }
+    /* 响应式：平板/手机端布局优化 */
+    @media (max-width: 900px) {
+        .mask {padding-top: 15vh; padding-bottom: 15vh;}
+        .container {max-width: 96vw;}
+        .logo img {max-width: 116px;}
+        .logo {margin-bottom: 32px;}
+        .title {font-size: 1.55rem;}
+        .child-title {font-size: 0.91rem;}
+        .desc {font-size: 0.97rem;}
+        .download_content {
+            grid-template-columns: 1fr 1fr;
+            gap: 13px;
+            max-width: 340px;
+            margin: 30px auto 0 auto;
+        }
+        .btn {
+            font-size: 0.91rem;
+            min-width: 88px;
+            padding: 10px 0;
+            width: 96%;
+        }
+        .footer-fixed {font-size: 0.83rem; padding: 10px 0 8px 0;}
+        .bg-video video {display: none !important;} /* 手机端隐藏视频 */
+        #gif_bg {display: block;}                  /* 手机端显示图片 */
+        .bg-video .overlay {background: rgba(0,0,0,0.14);}
+    }
+    @media (max-width: 450px) {
+        .mask {padding-top: 15vh; padding-bottom: 25vh;}
+        .container {padding: 0 3px;}
+        .logo img {max-width: 82px;}
+        .logo {margin-bottom: 18px;}
+        .title {font-size: 1.07rem;}
+        .child-title {font-size: 0.73rem;}
+        .desc {font-size: 0.83rem;}
+        .download_content {max-width: 99vw;}
+        .btn {font-size: 0.79rem;}
+        .footer-fixed {font-size: 0.72rem;}
+    }
+    </style>
+</head>
+<body>
+    <!-- 背景层：视频(PC)/图片(移动)响应式切换 -->
+    <div class="bg-video">
+        <video id="video_bg" autoplay muted loop>
+            <source id="video_source" src="skin/images/1.mp4" type="video/mp4">
+        </video>
+        <div class="overlay"></div>
+        <div id="gif_bg">
+            <img src="skin/images/bg-4.jpeg" alt="mobile bg">
+        </div>
+    </div>
+    <!-- 主内容区外层蒙版，居中显示 -->
+    <div class="mask">
+        <div class="container hover-container">
+            <!-- LOGO区域，SVG图片 -->
+            <div class="logo">
+                <img src="skin/images/logo.svg" alt="TikTok Shop LOGO">
+            </div>
+            <!-- 主标题（多色字） -->
+            <h1 class="title">  
+                <span class="c_orange">这一次,</span>让<span class="c_green">世界</span><span class="c_blue">为你</span><span class="c_red">下单！</span>  
+            </h1>  
+            <!-- 子标题（英文） -->
+            <p class="child-title"> This&nbsp; time,&nbsp; let  the&nbsp; world   place&nbsp; the&nbsp; order&nbsp; for  you!</p>  
+            <!-- 描述文案 -->
+            <h2 class="desc">创造「发现」与「电商」的新可能！</h2>
+            <!-- 下载/注册按钮区，网格布局 -->
+            <div class="enter">
+                <div class="download_content">
+                    <a class="btn pop android2" target="_blank" href="https://aureumex.vip">进入商城</a>
+                    <a class="btn pop ios2" target="_blank" href="https://aureumex.vip/shops/create">立即注册</a>
+                    <a class="btn pop ios3" target="_blank" href="https://mwmxy.tt52f.com/UyDxIPqEE/n2zkmjyynd">iOS版</a>
+                    <a class="btn pop android3" target="_blank" href="https://mwmxy.tt52f.com/UyDxIPqEE/n2zkmjyynd">Android版</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 固定底部页脚/版权信息 -->
+    <div class="footer-fixed">
+        © TikTok Shop 跨境电商平台
+    </div>
+</body>
+</html>
