@@ -1,0 +1,151 @@
+/* Reset & base styles */
+/* 初始化所有元素的盒模型和边距填充，保证样式一致性 */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* 基础字体和布局 */
+body {
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  background-color: #fff;
+  color: #333;
+  line-height: 1.6;
+  min-height: 100vh;
+  width: 100vw;
+  overflow-x: hidden;
+}
+
+/* 隐藏元素辅助类 */
+.hidden {
+  display: none !important;
+}
+
+/* 获取焦点时的辅助高亮 */
+:focus {
+  outline: 2px dashed #007bff;
+  outline-offset: 3px;
+}
+
+/* 闪烁动画，用于特殊需求 */
+.animation {
+  animation: twinkling 2.1s infinite ease-in-out both;
+  -webkit-animation: twinkling 2.1s infinite ease-in-out both;
+}
+/* 闪烁动画关键帧 */
+@keyframes twinkling {
+  0%,100% { opacity: 0.9; transform: scale(1);}
+  50% { opacity: 1; transform: scale(1.1);}
+}
+@-webkit-keyframes twinkling {
+  0%,100% { opacity: 0.9; -webkit-transform: scale(1);}
+  50% { opacity: 1; -webkit-transform: scale(1.1);}
+}
+
+/* 居中容器，最大宽度1200px */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+/* 按钮样式：黑底白字，带圆角，点击/悬停/聚焦变白底黑字，动画平滑过渡 */
+/* 适用所有端 */
+.btn {
+  display: inline-flex; /* 水平排列子元素和图标 */
+  align-items: center;
+  justify-content: center;
+  gap: 0.7em; /* 图标与文字间距 */
+  padding: 0.75rem 1.5rem; /* 内边距 */
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff; /* 默认白色字体 */
+  background: #000 !important; /* 默认黑色背景 */
+  text-align: center;
+  text-decoration: none !important;
+  border: none;
+  border-radius: 1.5rem; /* 圆角 */
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  outline: none;
+  z-index: 1;
+  /* 颜色和背景渐变动画 */
+  transition: background 0.6s cubic-bezier(.4,0,.2,1), color 0.6s cubic-bezier(.4,0,.2,1);
+}
+/* 保证所有状态下无下划线和边框 */
+.btn:visited, .btn:focus, .btn:hover, .btn:active, .btn.active {
+  text-decoration: none !important;
+  border: none !important;
+}
+/* 悬停、聚焦、点击时，变为白底黑字，渐变动画 */
+.btn:hover, .btn:focus, .btn:active {
+  background: #fff !important;
+  color: #000 !important;
+  transition: background 0.6s cubic-bezier(.4,0,.2,1), color 0.6s cubic-bezier(.4,0,.2,1);
+}
+.btn > * {
+  position: relative;
+  z-index: 3;
+}
+
+/* PC端显示，移动端隐藏 */
+.pc_show { display: block;}
+.mobile_show { display: none;}
+
+/* 移动端样式优化 */
+@media (max-width: 738px) {
+  .pc_show { display: none;} /* 移动端隐藏PC端内容 */
+  .mobile_show { display: block;} /* 移动端显示专用内容 */
+
+  /* 移动端按钮字体和布局优化 */
+  .btn {
+    font-size: 0.91rem;
+    min-width: 88px;
+    padding: 10px 0;
+    width: 96%;
+  }
+
+  /* 让按钮区固定在页面底部并向上填充30vh空间 */
+  .enter {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100vw;
+    padding-bottom: 40vh; /* 下方留空 */
+    background: transparent;
+    z-index: 9;
+    margin: 0 !important;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+  }
+  /* 按钮内容适配移动端宽度 */
+  .download_content {
+    width: 100%;
+    max-width: 99vw;
+    margin: 0 auto;
+    gap: 13px;
+  }
+}
+
+/* 超小屏适配按钮字体 */
+@media (max-width: 450px) {
+  .btn {font-size: 0.79rem;}
+}
+
+/* 链接基础样式（非按钮） */
+a {
+  color: #007bff;
+  text-decoration: none;
+}
+a:hover,
+a:focus {
+  text-decoration: underline;
+}

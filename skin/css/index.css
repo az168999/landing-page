@@ -1,0 +1,54 @@
+/* 标题通用样式，统一间距和颜色 */
+h1,h2,h3,h4,h5,h6 {
+  margin-bottom: 1rem;       /* 下边距 */
+  font-weight: 700;          /* 加粗 */
+  color: #222;               /* 深灰色字体 */
+}
+
+/* 段落通用样式 */
+p {
+  margin-bottom: 1rem;
+  color: #555;               /* 中灰色字体 */
+}
+
+/* 主内容区的区块间距（PC端） */
+.section {
+  padding: 4rem 0;
+}
+
+/* 居中布局辅助类 */
+.section-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+/* 响应式（平板/手机端）标题和按钮适配 */
+@media (max-width: 768px) {
+  .section { padding: 2rem 0;}
+  .btn { width: 100%; padding: 0.75rem; font-size: 0.9rem;}
+  h1 { font-size: 1.75rem;}
+  h2 { font-size: 1.5rem;}
+}
+
+/* 特性区块网格布局（PC端多列，移动端自适应） */
+.features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); /* 最小240px自适应多列 */
+  gap: 2rem;    /* 区块间距 */
+  margin-top: 2rem;
+}
+
+/* 单个特性区块样式 */
+.feature-item {
+  background-color: #f9f9f9;    /* 浅灰背景 */
+  padding: 2rem;                /* 内边距 */
+  border-radius: 0.5rem;        /* 圆角 */
+  transition: transform 0.3s ease;
+}
+
+/* 鼠标悬停特性区块浮起效果 */
+.feature-item:hover {
+  transform: translateY(-5px);
+}
