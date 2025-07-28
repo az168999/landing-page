@@ -112,20 +112,41 @@ body {
     width: 96%;
   }
 
-  /* 让按钮区固定在页面底部并向上填充30vh空间 */
+  /* 
+    2025-07-28: 
+    按照需求，原来为固定在底部的 .enter 现在改为悬浮跟随屏幕而非固定底部。
+    去除 position: fixed，改为 position: sticky 并适当调整样式，
+    使按钮区在滚动时保持在可视区域底部但不脱离文档流；
+    若需更为明显的悬浮效果，可改为 position: sticky 并设置 bottom: 16px;
+  */
   .enter {
+    /* 原样式已注释掉
     position: fixed;
     left: 0;
     bottom: 0;
     width: 100vw;
-    padding-bottom: 40vh; /* 下方留空 */
+    padding-bottom: 40vh; 
     background: transparent;
     z-index: 9;
     margin: 0 !important;
     display: flex;
     justify-content: center;
     align-items: flex-end;
+    */
+
+    /* 新样式：悬浮跟随屏幕底部，不固定，可随内容滚动 */
+    position: sticky; /* 悬浮但不脱离文档流 */
+    bottom: 16px;     /* 距离屏幕底部16px时悬停 */
+    width: 100%;
+    margin: 0 auto !important;
+    background: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    z-index: 9;
+    /* 可根据实际需要适当调整 padding/margin */
   }
+
   /* 按钮内容适配移动端宽度 */
   .download_content {
     width: 100%;
