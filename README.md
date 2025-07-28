@@ -32,9 +32,10 @@
 ## 联系方式
 
 - 官方网站：[your-website.com](https://your-website.com)
-- 客服邮箱：support@your-website.com
+- 客服邮箱：support@tiktok.com
+<!-- 暂时注释
 - 微信公众号：yourwechat
-
+-- >
 ---
 
 ## 行动按钮（示例）
