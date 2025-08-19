@@ -35,7 +35,7 @@
 
 ## 联系方式
 
-- 官方网站：[BodaTech 官网](https://az168999.github.io/ops)
+- 官方网站：[BodaTech 官网](https://github.io/az168999)
 
 
 <!--
