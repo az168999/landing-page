@@ -6,7 +6,7 @@
 
 #### 行动按钮（示例）
 
-[立即体验](https://az168999.github.io/ops)
+[立即体验](https://github.io/az168999/ops)
 
 ---
 
