@@ -40,11 +40,11 @@
 ### 使用步骤
 1. 克隆仓库：
    ```bash
-   git clone https://github.com/az168999/ops.git
+   git clone https://github.com/az168999/landing-page.git
    ```
 2. 进入项目目录：
    ```bash
-   cd ops
+   cd landing-page
    ```
 3. 打开 `index.html` 文件，直接在浏览器中运行。
 
