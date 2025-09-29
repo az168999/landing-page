@@ -1,4 +1,4 @@
-# Ops
+# 落地页
 
 [![GitHub Repository](https://img.shields.io/badge/GitHub-Repository-blue?logo=github)](https://github.com/az168999/ops)
 
@@ -7,7 +7,7 @@
 ---
 
 ## 📖 项目简介
-`Ops` 是一个基于 HTML 的项目，专注于提升运维管理的效率。该项目为开发者和运维工程师提供灵活的工具集，支持快速部署和扩展。
+`落地页` 是一个基于 HTML 的项目，专注于提升运维管理的效率。该项目为开发者和运维工程师提供灵活的工具集，支持快速部署和扩展。
 
 ---
 
@@ -63,7 +63,7 @@
 1. **Fork 仓库**：点击右上角的 `Fork` 按钮。
 2. **克隆到本地**：
    ```bash
-   git clone https://github.com/your-username/ops.git
+   git clone https://github.com/your-username/landing-page.git
    ```
 3. **创建分支**：
    ```bash
